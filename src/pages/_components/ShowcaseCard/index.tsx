@@ -77,6 +77,7 @@ function ShowcaseCard({user}: {user: User}) {
     if (user.description) {
       copy(user.description);
     }
+    window.open("https://ai.gap-year.top/ai-chat");
     setShowCopied(true);
     setTimeout(() => setShowCopied(false), 2000);
   };
@@ -122,7 +123,7 @@ function ShowcaseCard({user}: {user: User}) {
             type="button"
             onClick={handleCopyCode}
           >
-            {copied ? <Translate>已复制</Translate> : <Translate>复制</Translate>}
+            {copied ? <Translate>已复制</Translate> : <Translate>复制使用</Translate>}
           </button>
         </div>
         <p className={styles.showcaseCardBody}>👉 {user.remark}</p>

@@ -36,9 +36,9 @@ import ShowcaseTooltip from './_components/ShowcaseTooltip';
 
 import styles from './styles.module.css';
 
-const TITLE = translate({message: 'ChatGPT Shortcut - 简单易用的 ChatGPT 快捷指令表，让生产力倍增！标签筛选、关键词搜索和一键复制 Prompts'});
+const TITLE = translate({ message: 'Balloon AI - 专注于AIGC周边产品探索与研发' });
 const DESCRIPTION = translate({
-  message: '让生产力加倍的 ChatGPT 快捷指令',
+  message: 'Balloon AI，专注于AIGC周边产品探索与研发',
 });
 const SUBMIT_URL = 'https://github.com/rockbenben/ChatGPT-Shortcut/discussions/11';
 
@@ -48,13 +48,13 @@ type UserState = {
 };
 
 function restoreUserState(userState: UserState | null) {
-  const {scrollTopPosition, focusedElementId} = userState ?? {
+  const { scrollTopPosition, focusedElementId } = userState ?? {
     scrollTopPosition: 0,
     focusedElementId: undefined,
   };
   // @ts-expect-error: if focusedElementId is undefined it returns null
   document.getElementById(focusedElementId)?.focus();
-  window.scrollTo({top: scrollTopPosition});
+  window.scrollTo({ top: scrollTopPosition });
 }
 
 export function prepareUserState(): UserState | undefined {
@@ -84,7 +84,7 @@ function filterUsers(
     // eslint-disable-next-line no-param-reassign
     // 搜索范围
     users = users.filter((user) =>
-    (user.title + user.description + user.desc_cn + user.remark + user.desc_en+ user.remark_en).toLowerCase().includes(searchName.toLowerCase()),
+      (user.title + user.description + user.desc_cn + user.remark + user.desc_en+ user.remark_en).toLowerCase().includes(searchName.toLowerCase()),
     );
   }
   if (selectedTags.length === 0) {
@@ -125,11 +125,11 @@ function useFilteredUsers() {
 function ShowcaseHeader() {
   return (
     <section className="margin-top--lg margin-bottom--lg text--center">
-      <Heading as="h1">ChatGPT Shortcut</Heading>
-      <p>{DESCRIPTION}</p>
+      <Heading as="h1">AIGC，提高生产力，优化工作流程</Heading>
+      <p>{DESCRIPTION} &nbsp;&nbsp;&nbsp;&nbsp; <a href="https://jq.qq.com/?_wv=1027&k=PWsc1X0f" target="_blank" >加入QQ群</a></p>
       <Link className="button button--primary" to={SUBMIT_URL}>
         <Translate id="showcase.header.button">
-        🙏 请添加你的提示词
+          🙏 请添加你的提示词
         </Translate>
       </Link>
     </section>
@@ -137,7 +137,7 @@ function ShowcaseHeader() {
 }
 
 function useSiteCountPlural() {
-  const {selectMessage} = usePluralForm();
+  const { selectMessage } = usePluralForm();
   return (sitesCount: number) =>
     selectMessage(
       sitesCount,
@@ -148,7 +148,7 @@ function useSiteCountPlural() {
             'Pluralized label for the number of sites found on the showcase. Use as much plural forms (separated by "|") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)',
           message: '{sitesCount} prompts',
         },
-        {sitesCount},
+        { sitesCount },
       ),
     );
 }
@@ -182,7 +182,7 @@ function ShowcaseFilters() {
       </div>
       <ul className={clsx('clean-list', styles.checkboxList)}>
         {TagList.map((tag, i) => {
-          const {label, description, color} = Tags[tag];
+          const { label, description, color } = Tags[tag];
           const id = `showcase_checkbox_id_${tag}`;
 
           return (
@@ -291,6 +291,58 @@ function SearchBar() {
     </div>
   );
 }
+
+// 不区分移动端、PC 端，都使用 800ms 延时
+/* function SearchBar() {
+  const history = useHistory();
+  const location = useLocation();
+  const [value, setValue] = useState<string | null>(null);
+  useEffect(() => {
+    setValue(readSearchName(location.search));
+  }, [location]);
+
+  useEffect(() => {
+    const searchbar = document.getElementById('searchbar');
+    if (searchbar) {
+      searchbar.focus();
+    }
+  }, [value]);
+
+  const updateSearch = useCallback(
+    debounce((searchValue: string) => {
+      const newSearch = new URLSearchParams(location.search);
+      newSearch.delete(SearchNameQueryKey);
+      if (searchValue) {
+        newSearch.set(SearchNameQueryKey, searchValue);
+      }
+      history.push({
+        ...location,
+        search: newSearch.toString(),
+        state: prepareUserState(),
+      });
+    }, 800), //搜索延时
+    [location, history]
+  );
+
+  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value);
+    updateSearch(e.currentTarget.value);
+  };
+
+  return (
+    <div className={styles.searchContainer}>
+      <input
+        id="searchbar"
+        placeholder={translate({
+          message: 'Search for prompts...',
+          id: 'showcase.searchBar.placeholder',
+        })}
+        value={value ?? undefined}
+        onInput={handleInput}
+      />
+    </div>
+  );
+} */
 
 function ShowcaseCards() {
   const filteredUsers = useFilteredUsers();

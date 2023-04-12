@@ -8,7 +8,7 @@ const enNavbar = require('./src/components/LocalizedNavbar/Navbar.en');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Tag filtering, keyword search, and one-click copy prompts",
+  title: "Tag filtering, keyword search, and one-click copy prompts, AIGC assistant",
   // tagline: '方便中文使用 ChatGPT 快捷指令',
   favicon: "img/favicon.ico",
 
@@ -16,7 +16,7 @@ const config = {
   url: "https://www.aishort.top",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
+  baseUrl: "/scene/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -91,12 +91,12 @@ const config = {
       // Replace with your project's social card
       // image: 'img/docusaurus-social-card.jpg',
       metadata: [
-        { name: "keywords", content: "prompt,ChatGPT,AI prompts，提示词" },
+        { name: "keywords", content: "prompt,ChatGPT,AI prompts，AIGC，提示词" },
       ],
       navbar: getNavbar(),
       footer: {
         style: "dark",
-        copyright: `Copyright © ${new Date().getFullYear()} ChatGPT Shortcut`,
+        copyright: `Copyright © ${new Date().getFullYear()} Balloon AI`,
       },
       prism: {
         theme: lightCodeTheme,
@@ -110,7 +110,7 @@ module.exports = config;
 process.env.DOCUSAURUS_CURRENT_LOCALE ??= "zh-Hans";
 function getNavbar() {
   switch(process.env.DOCUSAURUS_CURRENT_LOCALE) {
-    case "en": return enNavbar;
+    // case "en": return enNavbar;
     default: return zhNavbar;
   }
 }
