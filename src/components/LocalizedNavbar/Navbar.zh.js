@@ -29,7 +29,7 @@ const zhNavbar = {
       position: 'right',
     },
     {
-      to: "https://ai.gap-year.top/ai-simple",
+      href: "https://ai.gap-year.top/ai-simple",
       label: '简洁版助手',
       target: '_blank',
       position: 'right',
