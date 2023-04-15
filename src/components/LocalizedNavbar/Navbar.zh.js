@@ -31,6 +31,7 @@ const zhNavbar = {
     {
       to: "https://ai.gap-year.top/ai-simple",
       label: '简洁版助手',
+      target: '_blank',
       position: 'right',
     },
     {

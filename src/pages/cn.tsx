@@ -31,16 +31,18 @@ import ShowcaseFilterToggle, {
   type Operator,
   readOperator,
 } from './_components/ShowcaseFilterToggle';
-import ShowcaseCard from './_components/ShowcaseCard/cn';
+import ShowcaseCard from './_components/ShowcaseCard';
 import ShowcaseTooltip from './_components/ShowcaseTooltip';
+import SimpleModal from './_components/QrcodeDialog';
 
 import styles from './styles.module.css';
+
 
 const TITLE = translate({ message: 'Balloon AI - 专注于AIGC周边产品探索与研发' });
 const DESCRIPTION = translate({
   message: 'Balloon AI，专注于AIGC周边产品探索与研发',
 });
-const SUBMIT_URL = 'https://github.com/rockbenben/ChatGPT-Shortcut/discussions/11';
+const SUBMIT_URL = 'https://github.com/balloontmz/ChatGPT-Shortcut';
 
 type UserState = {
   scrollTopPosition: number;
@@ -123,15 +125,33 @@ function useFilteredUsers() {
 }
 
 function ShowcaseHeader() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
   return (
     <section className="margin-top--lg margin-bottom--lg text--center">
       <Heading as="h1">AIGC，提高生产力，优化工作流程</Heading>
       <p>{DESCRIPTION} &nbsp;&nbsp;&nbsp;&nbsp; <a href="https://jq.qq.com/?_wv=1027&k=PWsc1X0f" target="_blank" >加入QQ群</a></p>
-      <Link className="button button--primary" to={SUBMIT_URL}>
+      <Link className="button button--success" to="https://ai.gap-year.top/ai-chat">
+        <Translate id="showcase.header.button">
+          开始对话 👉
+        </Translate>
+      </Link>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <Link className="button button--warning" onClick={toggleModal}>
+        <Translate id="showcase.header.button">
+            打赏 💸🙌🌟 
+        </Translate>
+      </Link>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <Link className="button button--secondary" to={SUBMIT_URL}>
         <Translate id="showcase.header.button">
           🙏 请添加你的提示词
         </Translate>
       </Link>
+      <SimpleModal modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
     </section>
   );
 }
